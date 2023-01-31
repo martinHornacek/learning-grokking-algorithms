@@ -1,4 +1,5 @@
 class BinarySearch():
+
     def search_iterative(self, list, item):
         # low and high keep track of which part of the list you'll search in.
         low = 0
@@ -20,6 +21,31 @@ class BinarySearch():
                 low = mid + 1
 
         return None
+    
+    def search_recursive(self, list, low, high, item):
+        # Check base case
+        if high >= low:
+
+            mid = (high + low) // 2
+            guess = list[mid]
+
+            # If element is present at the middle itself 
+            if guess == item:
+                return mid 
+  
+            # If element is smaller than mid, then it can nly
+            # be presnet if left subarray
+            elif guess > item:
+
+                return self.search_recursive(list, low, mid - 1, item)
+
+            # Else the elemnt can only be presnet in right subarray
+            else: 
+                return self.search_recursive(list, mid + 1, high, item)
+
+        else:
+            # Element is not present in the array
+            return None
 
 if __name__ == "__main__":
   # We must initialize the class to use the methods of this class
